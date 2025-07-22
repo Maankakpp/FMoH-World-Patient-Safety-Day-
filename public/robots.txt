@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://patientsafetyday2025.somalia.gov.so/sitemap.xml 
