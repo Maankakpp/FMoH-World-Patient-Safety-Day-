@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -16,8 +16,55 @@ const Footer: React.FC = () => {
   const [showPastEventsModal, setShowPastEventsModal] = React.useState(false);
   const [pastEventsAutoplay, setPastEventsAutoplay] = React.useState(true);
 
+  // Focus trap and Escape key for modals
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (showResourcesModal || showPastEventsModal) {
+        // Escape closes modal
+        if (e.key === 'Escape') {
+          if (showResourcesModal) setShowResourcesModal(false);
+          if (showPastEventsModal) setShowPastEventsModal(false);
+        }
+        // Focus trap
+        const modalSelector = showResourcesModal ? '[aria-label="Resources Modal"]' : '[aria-label="Past Events Modal"]';
+        const modal = document.querySelector(modalSelector);
+        if (modal) {
+          const focusable = modal.querySelectorAll('a, button, textarea, input, select, [tabindex]:not([tabindex="-1"])');
+          const first = focusable[0] as HTMLElement;
+          const last = focusable[focusable.length - 1] as HTMLElement;
+          if (e.key === 'Tab') {
+            if (e.shiftKey) {
+              if (document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+              }
+            } else {
+              if (document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+              }
+            }
+          }
+        }
+      }
+    }
+    if (showResourcesModal || showPastEventsModal) {
+      document.addEventListener('keydown', handleKeyDown);
+      // Focus first focusable element in modal
+      setTimeout(() => {
+        const modalSelector = showResourcesModal ? '[aria-label="Resources Modal"]' : '[aria-label="Past Events Modal"]';
+        const modal = document.querySelector(modalSelector);
+        if (modal) {
+          const focusable = modal.querySelectorAll('a, button, textarea, input, select, [tabindex]:not([tabindex="-1"])');
+          if (focusable.length) (focusable[0] as HTMLElement).focus();
+        }
+      }, 0);
+    }
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [showResourcesModal, showPastEventsModal]);
+
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-900 text-white" role="contentinfo" aria-label="Site Footer">
       {/* Main Footer Content */}
       <div className="py-16">
         <div className="container mx-auto px-4">
@@ -30,11 +77,17 @@ const Footer: React.FC = () => {
                   className="focus:outline-none"
                   aria-label="Refresh Home"
                 >
-                  <img
-                    src="/wpsd-logo.png"
-                    alt="World Patient Safety Day Logo"
-                    className="h-12 w-auto max-w-[180px]"
-                  />
+                  <picture>
+                    <source srcSet="/wpsd-logo.webp" type="image/webp" />
+                    <img
+                      src="/wpsd-logo.png"
+                      alt="World Patient Safety Day Logo"
+                      className="h-12 w-auto max-w-[180px]"
+                      width="180"
+                      height="48"
+                      loading="lazy"
+                    />
+                  </picture>
                 </button>
               </div>
               <p className="text-gray-400 mb-6 leading-relaxed">
@@ -57,7 +110,7 @@ const Footer: React.FC = () => {
             </div>
 
             {/* Quick Links */}
-            <div className="flex flex-col">
+            <nav className="flex flex-col" aria-label="Footer Quick Links">
               <h4 className="text-lg font-semibold mb-6 text-who-blue text-center">Quick Links</h4>
               <ul className="space-y-3">
                 {quickLinks.map((link, index) => (
@@ -79,20 +132,17 @@ const Footer: React.FC = () => {
                         {link.label}
                       </button>
                     ) : (
-                      <a
-                        href={link.href}
-                        className="text-gray-400 hover:text-white hover:underline transition-colors"
-                      >
+                      <a href={link.href} className="text-gray-400 hover:text-white transition-colors focus:outline-none">
                         {link.label}
                       </a>
                     )}
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
 
             {/* Contact Info */}
-            <div className="flex flex-col">
+            <address className="flex flex-col not-italic" aria-label="Contact Information">
               <h4 className="text-lg font-semibold mb-6 text-who-blue text-center">Contact</h4>
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
@@ -111,7 +161,7 @@ const Footer: React.FC = () => {
                   </span>
                 </div>
               </div>
-            </div>
+            </address>
 
             {/* Event Statement */}
             <div className="flex flex-col">
@@ -133,8 +183,7 @@ const Footer: React.FC = () => {
             <div className="text-gray-400 text-sm mb-4 md:mb-0">
               © 2025 World Patient Safety Day. All rights reserved.
             </div>
-            
-            <div className="flex space-x-6 text-sm">
+            <nav className="flex space-x-6 text-sm" aria-label="Footer Legal Links">
               <Link to="/privacy" className="text-gray-400 hover:text-white hover:underline transition-colors">
                 Privacy Policy
               </Link>
@@ -144,14 +193,14 @@ const Footer: React.FC = () => {
               <Link to="/cookies" className="text-gray-400 hover:text-white hover:underline transition-colors">
                 Cookie Policy
               </Link>
-            </div>
+            </nav>
           </div>
         </div>
       </div>
 
       {/* Resources Modal */}
       {showResourcesModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40" role="dialog" aria-modal="true" aria-label="Resources Modal">
           <div className="bg-white rounded-2xl shadow-2xl p-0 max-w-xs w-full relative border border-who-blue">
             <div className="rounded-t-2xl bg-gradient-to-r from-who-blue to-who-orange px-6 py-3 flex items-center justify-between">
               <h3 className="text-lg font-bold text-white">Resources</h3>
@@ -207,7 +256,7 @@ const Footer: React.FC = () => {
 
       {/* Past Events Modal */}
       {showPastEventsModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40" role="dialog" aria-modal="true" aria-label="Past Events Modal">
           <div className="bg-white rounded-2xl shadow-2xl p-0 max-w-lg w-full relative border border-who-blue">
             <div
               className="rounded-t-2xl bg-gradient-to-r from-who-blue to-who-orange px-6 py-3 flex items-center justify-between cursor-pointer"

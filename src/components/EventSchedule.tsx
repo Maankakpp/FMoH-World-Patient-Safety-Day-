@@ -122,11 +122,11 @@ const EventSchedule: React.FC = () => {
   return (
     <section id="schedule" className="py-20 bg-white" aria-labelledby="schedule-heading">
       <div className="container">
-        <div className="text-center mb-16">
-          <h2 id="schedule-heading" className="text-4xl font-bold text-who-blue mb-4 text-center">
+        <div className="section-header">
+          <h2 id="schedule-heading" className="section-title">
             Event Schedule
           </h2>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8 text-center">
+          <p className="section-subtitle">
             A comprehensive day of learning, networking, and advancing patient safety
           </p>
           <div className="relative inline-block" ref={dropdownRef} aria-label="Add to Calendar Options">

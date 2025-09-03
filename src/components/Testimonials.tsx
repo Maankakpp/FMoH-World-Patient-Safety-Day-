@@ -7,7 +7,7 @@ const Testimonials: React.FC = () => {
       id: 1,
       name: "Dr. Fadumo Ahmed",
       role: "Chief of Pediatrics, Banadir Hospital, Mogadishu",
-      image: "/testimonial-1.jpg",
+      image: "https://ui-avatars.com/api/?name=Dr.+Fadumo+Ahmed&background=2563eb&color=fff&size=128",
       content: "World Patient Safety Day initiatives have transformed our approach to newborn care. The training and protocols have significantly reduced preventable complications in our NICU.",
       rating: 5
     },
@@ -65,11 +65,11 @@ const Testimonials: React.FC = () => {
       <div className="container">
         {/* Statistics */}
         <div className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-who-blue mb-4 text-center">
+          <div className="section-header">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 text-center">
               Patient Safety: The Foundation of Quality Health Care
             </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto text-center">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center">
               Healthcare professionals across Somalia are committed to making care safer for every newborn and child
             </p>
           </div>
@@ -86,7 +86,7 @@ const Testimonials: React.FC = () => {
                 <div className="text-4xl font-extrabold text-gray-900 mb-2 drop-shadow-lg">
                   {stat.number}
                 </div>
-                <div className="text-lg text-gray-700 font-medium text-center">
+                <div className="text-lg text-gray-800 font-medium text-center">
                   {stat.label}
                 </div>
               </div>
@@ -96,11 +96,11 @@ const Testimonials: React.FC = () => {
 
         {/* Testimonials */}
         <div className="mb-16">
-          <div className="text-center mb-12">
-            <h3 id="voices" className="text-3xl font-bold text-who-blue mb-4 text-center">
-              Voices from Somalia's Healthcare Experts
+          <div className="section-header">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4 text-center">
+              Expert Opinions
             </h3>
-            <p className="text-lg text-gray-700">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto text-center">
               Hear from Somali healthcare professionals making a difference in patient safety
             </p>
           </div>
@@ -109,7 +109,7 @@ const Testimonials: React.FC = () => {
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
-                className="card shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 flex flex-col items-center"
+                className="card shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 flex flex-col items-center hover-lift"
               >
                 <div className="flex items-center mb-4 justify-center">
                   {[...Array(testimonial.rating)].map((_, i) => (
@@ -117,21 +117,24 @@ const Testimonials: React.FC = () => {
                   ))}
                 </div>
                 <Quote className="h-8 w-8 text-blue-200 mb-4" />
-                <p className="text-gray-700 mb-6 leading-relaxed italic text-center">
+                <p className="text-gray-800 mb-6 leading-relaxed italic text-center">
                   "{testimonial.content}"
                 </p>
                 <div className="flex items-center">
-                  <img
-                    src={testimonial.image}
-                    alt={`Photo of ${testimonial.name}, ${testimonial.role}`}
-                    className="w-12 h-12 rounded-full object-cover mr-4"
-                    width="48"
-                    height="48"
-                    loading="lazy"
-                  />
+                  <picture>
+                    <source srcSet={testimonial.image.replace('.jpg', '.webp')} type="image/webp" />
+                    <img
+                      src={testimonial.image}
+                      alt={`Photo of ${testimonial.name}, ${testimonial.role}`}
+                      className="w-12 h-12 rounded-full object-cover mr-4"
+                      width="48"
+                      height="48"
+                      loading="lazy"
+                    />
+                  </picture>
                   <div className="ml-4 text-center">
-                    <div className="font-bold text-who-blue">{testimonial.name}</div>
-                    <div className="text-gray-600 text-sm">{testimonial.role}</div>
+                    <div className="font-bold text-who-blue" style={{color: '#003366'}}>{testimonial.name}</div>
+                    <div className="text-gray-700 text-sm">{testimonial.role}</div>
                   </div>
                 </div>
               </div>
@@ -139,29 +142,7 @@ const Testimonials: React.FC = () => {
           </div>
         </div>
 
-        {/* Media Section */}
-        <div className="card">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              World Patient Safety Day: Engaging patients for patient safety
-            </h3>
-            <p className="text-gray-700">
-              Documenting our progress in making healthcare safer for everyone
-            </p>
-          </div>
-          <div className="aspect-w-16 aspect-h-9 w-full rounded-xl overflow-hidden shadow-lg mx-auto">
-            <iframe
-              width="100%"
-              height="400"
-              src="https://www.youtube.com/embed/8P9ABYMsTuE?autoplay=1&mute=1&loop=1&playlist=8P9ABYMsTuE"
-              title="World Patient Safety Day: Engaging patients for patient safety"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              style={{ minHeight: '300px', background: '#000' }}
-            ></iframe>
-          </div>
-        </div>
+
       </div>
     </section>
   );

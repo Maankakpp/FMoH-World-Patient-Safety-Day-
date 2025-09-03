@@ -2,54 +2,711 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom line-clamp utility */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 @layer base {
   html {
-    font-family: 'Inter', 'Segoe UI', 'Arial', 'sans-serif';
+    font-family: 'Inter', 'Roboto', 'Segoe UI', 'Arial', 'sans-serif';
     background-color: #f8f9fa;
+    font-size: 16px;
+    zoom: 1;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    line-height: 1.6;
   }
+  
   body {
     @apply bg-who-lightblue text-gray-900;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #333; /* Improved contrast for better readability */
   }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Enhanced Typography Hierarchy with Better Contrast */
   h1 {
-    @apply text-4xl md:text-5xl font-extrabold leading-tight mb-6;
+    @apply text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight mb-6;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900; /* font-black for maximum impact */
+    color: #1a202c; /* Darker for better contrast */
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
+  
   h2 {
-    @apply text-3xl md:text-4xl font-bold leading-snug mb-4;
+    @apply text-2xl md:text-3xl lg:text-4xl font-extrabold leading-snug mb-4;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-weight: 800; /* font-extrabold for strong hierarchy */
+    color: #1a202c; /* Darker for better contrast */
+    letter-spacing: -0.01em;
+    line-height: 1.2;
   }
+  
   h3 {
-    @apply text-2xl md:text-3xl font-semibold leading-snug mb-3;
+    @apply text-xl md:text-2xl lg:text-3xl font-bold leading-snug mb-3;
+    font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+    font-weight: 700; /* font-bold for clear distinction */
+    color: #2d3748; /* Better contrast */
+    line-height: 1.3;
   }
+  
   h4 {
-    @apply text-xl font-semibold mb-2;
+    @apply text-lg md:text-xl font-semibold mb-2;
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    font-weight: 600;
+    color: #2d3748;
+    line-height: 1.4;
   }
+  
   p {
     @apply leading-relaxed mb-4;
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: #374151; /* Darker grey for better readability - WCAG AA compliant */
+    line-height: 1.7;
+    font-weight: 400;
   }
+  
+  /* Enhanced section styling with subtle texture */
   section {
-    @apply py-12 md:py-16;
+    @apply py-8 md:py-12 lg:py-16;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
   }
+  
+  /* Subtle texture for sections */
+  section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.02) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
   .container {
-    @apply max-w-screen-xl mx-auto px-4 md:px-8;
+    @apply px-4 md:px-6 lg:px-8 xl:px-12;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Enhanced responsive text utilities with better contrast */
+  .text-responsive-sm {
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    color: #374151; /* Darker for better readability */
+  }
+  
+  .text-responsive-base {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: #374151; /* Darker for better readability */
+  }
+  
+  .text-responsive-lg {
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    color: #1f2937; /* Darker for better contrast */
+  }
+  
+  .text-responsive-xl {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    color: #1f2937; /* Darker for better contrast */
+  }
+  
+  /* Enhanced link styling */
+  a {
+    color: #3182ce;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  a:hover {
+    color: #2c5282;
+    text-decoration: underline;
+  }
+  
+  /* Enhanced button styling with better hover states */
+  button {
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Responsive breakpoints with enhanced contrast */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  h1 {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+  
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1281px) {
+  .container {
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }
 
 @layer components {
+  /* Enhanced card styling with better hover effects and texture */
   .card {
-    @apply bg-white rounded-2xl shadow-lg p-8 mb-8;
+    @apply bg-white rounded-2xl shadow-lg p-4 md:p-6 lg:p-8 mb-6;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  }
+  
+  .card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border-color: rgba(59, 130, 246, 0.2);
+  }
+  
+  .card-sm {
+    @apply p-2 md:p-4 lg:p-6;
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+  }
+  
+  .card-hover {
+    @apply hover:shadow-xl hover:scale-105 transition-all duration-300;
+  }
+  
+  /* Enhanced grid utilities */
+  .grid-responsive {
+    display: grid;
+    gap: clamp(1rem, 2vw, 2rem);
+  }
+  
+  .grid-responsive-1 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-responsive-2 {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  
+  .grid-responsive-3 {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  .grid-responsive-4 {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
+  /* Enhanced spacing utilities */
+  .space-responsive {
+    gap: clamp(1rem, 2vw, 2rem);
+  }
+  
+  .padding-responsive {
+    padding: clamp(1rem, 3vw, 2rem);
+  }
+  
+  .margin-responsive {
+    margin: clamp(1rem, 3vw, 2rem);
+  }
+  
+  /* Enhanced button components with better contrast and hover states */
+  .btn-primary {
+    @apply bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-3 rounded-lg font-semibold;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    @apply from-orange-600 to-orange-700;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4);
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-orange-600 border-2 border-orange-600 px-6 py-3 rounded-lg font-semibold;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-secondary:hover {
+    @apply bg-orange-600 text-white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.2);
+  }
+  
+  /* Enhanced section headers with visual dividers */
+  .section-header {
+    @apply text-center mb-12;
+    position: relative;
+  }
+  
+  .section-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #f97316, #ea580c);
+    border-radius: 2px;
+  }
+  
+  .section-title {
+    @apply text-4xl md:text-5xl font-extrabold mb-4;
+    background: linear-gradient(135deg, #1a202c, #2d3748);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .section-subtitle {
+    @apply text-xl text-gray-600 max-w-3xl mx-auto;
+    color: #374151; /* Darker for better readability */
+    font-weight: 400;
+  }
+  
+  /* Enhanced accordion styling */
+  .accordion-item {
+    @apply bg-white rounded-lg shadow-md border border-gray-200 mb-4;
+    transition: all 0.3s ease;
+  }
+  
+  .accordion-item:hover {
+    @apply shadow-lg;
+    transform: translateY(-2px);
+  }
+  
+  .accordion-button {
+    @apply w-full text-left p-4 font-semibold text-gray-900;
+    transition: all 0.3s ease;
+  }
+  
+  .accordion-button:hover {
+    @apply bg-gray-50;
+  }
+  
+  .accordion-content {
+    @apply p-4 text-gray-700 leading-relaxed;
+    color: #374151; /* Darker for better readability */
   }
 }
 
 @layer utilities {
+  /* Enhanced stat styling */
+  .stat-number {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 900; /* font-black for maximum impact */
+    color: #1a202c;
+    line-height: 1.2;
+  }
+  
+  .stat-label {
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-weight: 500;
+    color: #374151; /* Darker for better readability */
+    line-height: 1.4;
+  }
+  
+  /* Enhanced map styling */
+  .map-embed {
+    width: 100%;
+    min-height: clamp(250px, 40vh, 400px);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    display: block;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+  }
+  
+  /* Enhanced color utilities */
   .bg-who-orange {
     background-color: #F58220;
   }
+  
   .bg-who-blue {
     background-color: #0072CE;
   }
+  
   .bg-who-lightblue {
     background-color: #00AEEF;
   }
+  
   .bg-who-darkblue {
     background-color: #003366;
   }
+  
+  /* Enhanced text colors for better contrast */
+  .text-primary {
+    color: #1a202c;
+  }
+  
+  .text-secondary {
+    color: #374151; /* Darker for better readability */
+  }
+  
+  .text-muted {
+    color: #6b7280;
+  }
+  
+  /* Enhanced centering utilities */
+  .content-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .section-balanced {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: clamp(1rem, 3vw, 2rem);
+    padding-right: clamp(1rem, 3vw, 2rem);
+  }
+  
+  /* Enhanced container centering */
+  .container-centered {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: clamp(1rem, 3vw, 2rem);
+    padding-right: clamp(1rem, 3vw, 2rem);
+    width: 100%;
+  }
+  
+  /* Enhanced image utilities */
+  .img-responsive {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 0.5rem;
+  }
+  
+  .img-cover {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+  }
+  
+  /* Enhanced button utilities */
+  .btn-responsive {
+    padding: clamp(0.5rem, 1.5vw, 1rem) clamp(1rem, 2.5vw, 1.5rem);
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    border-radius: clamp(0.25rem, 1vw, 0.5rem);
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  /* Enhanced text alignment */
+  .text-responsive-center {
+    text-align: center;
+  }
+  
+  @media (max-width: 640px) {
+    .text-responsive-center {
+      text-align: left;
+    }
+  }
+  
+  /* Enhanced navigation */
+  .nav-responsive {
+    padding: clamp(0.5rem, 2vw, 1rem);
+  }
+  
+  /* Enhanced hero section */
+  .hero-responsive {
+    min-height: clamp(60vh, 80vh, 100vh);
+    padding: clamp(2rem, 5vw, 4rem) 0;
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+  }
+  
+  /* Enhanced grid for different screen sizes */
+  .grid-mobile {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-tablet {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .grid-desktop {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  /* Enhanced spacing utilities */
+  .space-y-responsive > * + * {
+    margin-top: clamp(1rem, 3vw, 2rem);
+  }
+  
+  .space-x-responsive > * + * {
+    margin-left: clamp(1rem, 2vw, 1.5rem);
+  }
+  
+  /* Enhanced typography scale */
+  .text-responsive-xs {
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    color: #6b7280;
+  }
+  
+  .text-responsive-sm {
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    color: #374151; /* Darker for better readability */
+  }
+  
+  .text-responsive-base {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    color: #374151; /* Darker for better readability */
+  }
+  
+  .text-responsive-lg {
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    color: #1f2937; /* Darker for better contrast */
+  }
+  
+  .text-responsive-xl {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    color: #1f2937; /* Darker for better contrast */
+  }
+  
+  .text-responsive-2xl {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: #1a202c;
+  }
+  
+  .text-responsive-3xl {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    color: #1a202c;
+  }
+  
+  .text-responsive-4xl {
+    font-size: clamp(2.5rem, 5vw, 3rem);
+    color: #1a202c;
+  }
+  
+  .text-responsive-5xl {
+    font-size: clamp(3rem, 6vw, 4rem);
+    color: #1a202c;
+  }
+  
+  /* Enhanced shadows and depth */
+  .shadow-soft {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+  
+  .shadow-medium {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .shadow-strong {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Enhanced gradients */
+  .gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .gradient-secondary {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  }
+  
+  .gradient-accent {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  }
+  
+  /* Enhanced hover effects */
+  .hover-lift {
+    transition: all 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Enhanced focus states for accessibility */
+  .focus-visible {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+  }
+  
+  /* Enhanced loading states */
+  .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+  
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+}
+
+/* Enhanced zoom fixes */
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Enhanced viewport settings */
+@viewport {
+  width: device-width;
+  initial-scale: 1;
+  maximum-scale: 1;
+  user-scalable: no;
+}
+
+/* Enhanced focus states for accessibility */
+*:focus {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+}
+
+/* Enhanced selection styling */
+::selection {
+  background-color: #f97316;
+  color: white;
+}
+
+::-moz-selection {
+  background-color: #f97316;
+  color: white;
+}
+
+/* Enhanced form styling for better accessibility */
+input, textarea, select {
+  @apply border border-gray-300 rounded-lg px-3 py-2;
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  @apply border-orange-500 ring-2 ring-orange-200;
+  outline: none;
+}
+
+/* Enhanced validation styling */
+.input-error {
+  @apply border-red-500 ring-2 ring-red-200;
+}
+
+.error-message {
+  @apply text-red-600 text-sm mt-1;
+}
+
+/* Enhanced loading indicators */
+.loading-spinner {
+  @apply animate-spin rounded-full border-2 border-gray-300 border-t-orange-500;
+}
+
+/* Enhanced ARIA support */
+[aria-hidden="true"] {
+  display: none !important;
+}
+
+[aria-expanded="true"] .accordion-icon {
+  transform: rotate(180deg);
+}
+
+/* Enhanced keyboard navigation */
+.focus-visible:focus {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+}
+
+/* Enhanced responsive images */
+.responsive-image {
+  @apply w-full h-auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Enhanced video container */
+.video-container {
+  @apply relative w-full;
+  aspect-ratio: 16 / 9;
+}
+
+.video-container iframe {
+  @apply absolute top-0 left-0 w-full h-full;
 }

@@ -1,0 +1,21 @@
+{
+  "name": "World Patient Safety Day 2025 Somalia",
+  "short_name": "WPSD 2025",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#00AEEF",
+  "theme_color": "#0072CE",
+  "description": "Join World Patient Safety Day 2025 - Safe care for every newborn and child in Somalia.",
+  "icons": [
+    {
+      "src": "/wpsd-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/wpsd-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+} 

@@ -9,6 +9,7 @@ export default defineConfig({
     // @ts-expect-error: process.env is available in Vite config context
     process.env.ANALYZE && visualizer({ open: true, filename: 'dist/bundle-analysis.html' })
   ].filter(Boolean),
+  
   optimizeDeps: {
     exclude: ['lucide-react'],
   },

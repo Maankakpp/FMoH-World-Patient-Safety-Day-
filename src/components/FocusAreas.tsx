@@ -56,22 +56,22 @@ const FocusAreas: React.FC = () => {
   return (
     <section id="focus-areas" className="py-20 bg-gray-50">
       <div className="container">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-who-blue mb-4 text-center">
+        <div className="section-header">
+          <h2 className="section-title">
             Key Focus Areas for Somalia
           </h2>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto text-center">
+          <p className="section-subtitle">
             Addressing critical areas of pediatric and newborn care safety across Somalia's healthcare system
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {areas.map((area, index) => {
             const IconComponent = area.icon;
             return (
               <div
                 key={index}
-                className={`card ${area.bgColor} group hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center`}
+                className={`card ${area.bgColor} group hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer flex flex-col items-center hover-lift`}
               >
                 <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br ${area.color} mb-6 group-hover:scale-110 transition-transform`}>
                   <IconComponent className="h-12 w-12 text-white" />

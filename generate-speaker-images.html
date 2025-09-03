@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Speaker Images</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .speaker {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .speaker img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .download-btn {
+            background: #2563eb;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .download-btn:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <h1>Speaker Image Generator</h1>
+    <p>Click the download buttons to save speaker images. Right-click and "Save image as..." to download.</p>
+    
+    <div class="speaker">
+        <h3>Dr. Sarah Johnson</h3>
+        <img src="https://ui-avatars.com/api/?name=Dr.+Sarah+Johnson&background=2563eb&color=fff&size=400" alt="Dr. Sarah Johnson">
+        <br>
+        <button class="download-btn" onclick="downloadImage('https://ui-avatars.com/api/?name=Dr.+Sarah+Johnson&background=2563eb&color=fff&size=400', 'speaker-1.jpg')">Download</button>
+    </div>
+
+    <div class="speaker">
+        <h3>Prof. Michael Chen</h3>
+        <img src="https://ui-avatars.com/api/?name=Prof.+Michael+Chen&background=1d4ed8&color=fff&size=400" alt="Prof. Michael Chen">
+        <br>
+        <button class="download-btn" onclick="downloadImage('https://ui-avatars.com/api/?name=Prof.+Michael+Chen&background=1d4ed8&color=fff&size=400', 'speaker-2.jpg')">Download</button>
+    </div>
+
+    <div class="speaker">
+        <h3>Dr. Emily Rodriguez</h3>
+        <img src="https://ui-avatars.com/api/?name=Dr.+Emily+Rodriguez&background=059669&color=fff&size=400" alt="Dr. Emily Rodriguez">
+        <br>
+        <button class="download-btn" onclick="downloadImage('https://ui-avatars.com/api/?name=Dr.+Emily+Rodriguez&background=059669&color=fff&size=400', 'speaker-3.jpg')">Download</button>
+    </div>
+
+    <div class="speaker">
+        <h3>Dr. Ahmed Hassan</h3>
+        <img src="https://ui-avatars.com/api/?name=Dr.+Ahmed+Hassan&background=dc2626&color=fff&size=400" alt="Dr. Ahmed Hassan">
+        <br>
+        <button class="download-btn" onclick="downloadImage('https://ui-avatars.com/api/?name=Dr.+Ahmed+Hassan&background=dc2626&color=fff&size=400', 'speaker-4.jpg')">Download</button>
+    </div>
+
+    <div class="speaker">
+        <h3>Nurse Halima Omar</h3>
+        <img src="https://ui-avatars.com/api/?name=Nurse+Halima+Omar&background=d97706&color=fff&size=400" alt="Nurse Halima Omar">
+        <br>
+        <button class="download-btn" onclick="downloadImage('https://ui-avatars.com/api/?name=Nurse+Halima+Omar&background=d97706&color=fff&size=400', 'speaker-5.jpg')">Download</button>
+    </div>
+
+    <div class="speaker">
+        <h3>Dr. Fadumo Ahmed</h3>
+        <img src="https://ui-avatars.com/api/?name=Dr.+Fadumo+Ahmed&background=7c3aed&color=fff&size=400" alt="Dr. Fadumo Ahmed">
+        <br>
+        <button class="download-btn" onclick="downloadImage('https://ui-avatars.com/api/?name=Dr.+Fadumo+Ahmed&background=7c3aed&color=fff&size=400', 'speaker-6.jpg')">Download</button>
+    </div>
+
+    <script>
+        function downloadImage(url, filename) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html> 
