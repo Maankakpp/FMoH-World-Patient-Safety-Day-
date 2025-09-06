@@ -251,4 +251,4 @@ const SocialMediaSection: React.FC = () => {
   );
 };
 
-export default SocialMediaSection; 
+export default SocialMediaSection;

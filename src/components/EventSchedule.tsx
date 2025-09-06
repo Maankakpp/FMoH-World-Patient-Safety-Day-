@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Clock, MapPin, Users, Download } from 'lucide-react';
+import SectionTitle from './SectionTitle';
 
 interface ScheduleItem {
   id: string;
@@ -122,14 +123,11 @@ const EventSchedule: React.FC = () => {
   return (
     <section id="schedule" className="py-20 bg-white" aria-labelledby="schedule-heading">
       <div className="container">
-        <div className="section-header">
-          <h2 id="schedule-heading" className="section-title">
-            Event Schedule
-          </h2>
-          <p className="section-subtitle">
-            A comprehensive day of learning, networking, and advancing patient safety
-          </p>
-          <div className="relative inline-block" ref={dropdownRef} aria-label="Add to Calendar Options">
+        <SectionTitle 
+          title="Event Schedule"
+          subtitle="A comprehensive day of learning, networking, and advancing patient safety"
+        />
+        <div className="relative inline-block text-center w-full" ref={dropdownRef} aria-label="Add to Calendar Options">
             <button
               onClick={() => setShowCalendarOptions((v) => !v)}
               className="inline-flex items-center bg-gradient-to-r from-who-blue to-who-orange text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all"
@@ -149,7 +147,6 @@ const EventSchedule: React.FC = () => {
               </div>
             )}
           </div>
-        </div>
         <div className="max-w-4xl mx-auto">
           <div className="space-y-8">
             {schedule.map((item) => (

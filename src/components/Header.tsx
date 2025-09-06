@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import RegisterButton from './RegisterButton';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,7 +37,7 @@ const Header: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [sections]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -49,55 +50,39 @@ const Header: React.FC = () => {
   return (
     <header 
       className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 shadow-lg backdrop-blur-lg' : 'bg-white/95 backdrop-blur-sm'
+        isScrolled ? 'bg-white/90 shadow-md backdrop-blur-lg' : 'bg-transparent'
       }`}
     >
-      <div className="container flex items-center justify-between py-3">
+      <div className="container flex items-center justify-between py-4">
         {/* Logo */}
-        <div className="flex items-center space-x-2">
-          <button
-            onClick={() => window.location.reload()}
-            className="focus:outline-none"
-            aria-label="Refresh Home"
-          >
-            <picture>
-              <source srcSet="/wpsd-logo.webp" type="image/webp" />
-              <img
-                src="/wpsd-logo.png"
-                alt="World Patient Safety Day Logo"
-                className="h-16 w-auto max-w-[200px]"
-                width="200"
-                height="62"
-                loading="lazy"
-              />
-            </picture>
-          </button>
-        </div>
+        <a href="/" className="focus:outline-none" aria-label="Go to homepage">
+          <picture>
+            <source srcSet="/wpsd-logo.webp" type="image/webp" />
+            <img
+              src="/wpsd-logo.png"
+              alt="World Patient Safety Day Logo"
+              className="h-14 w-auto transition-all duration-300 hover:opacity-80"
+              width="175"
+              height="54"
+              loading="lazy"
+            />
+          </picture>
+        </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-2 bg-gray-100/80 rounded-full p-2 shadow-sm" aria-label="Main Navigation">
+        <nav className="hidden lg:flex items-center space-x-4" aria-label="Main Navigation">
           {sections.map(section => (
             <button
               key={section.id}
               onClick={() => scrollToSection(section.id)}
-              className={`px-4 py-2 font-bold tracking-wider uppercase rounded-full transition-all duration-300 ${
-                activeSection === section.id
-                  ? 'bg-who-blue text-white shadow-md'
-                  : 'text-who-blue hover:bg-who-blue/10'
+              className={`relative px-3 py-2 font-medium text-gray-700 transition-colors duration-300 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-who-blue after:transition-transform after:duration-300 after:scale-x-0 hover:after:scale-x-100 focus:outline-none ${
+                activeSection === section.id ? 'after:scale-x-100' : ''
               }`}
             >
               {section.name}
             </button>
           ))}
-          <button
-            onClick={() => {
-              const el = document.getElementById('registration');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="bg-gradient-to-r from-who-blue to-who-orange text-white px-6 py-2 rounded-full font-semibold shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 ml-2"
-          >
-            Register Now
-          </button>
+          <RegisterButton className="px-5 py-2 rounded-md ml-4" />
         </nav>
 
         {/* Mobile Menu Button */}
@@ -105,36 +90,30 @@ const Header: React.FC = () => {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="lg:hidden p-2 text-gray-700"
         >
-          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
         </button>
       </div>
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden mt-4 py-6 border-t border-gray-200 bg-white/95 rounded-2xl shadow-xl">
-          <nav className="flex flex-col space-y-4 px-4">
+        <div className="lg:hidden mt-2 py-4 bg-white/95 rounded-lg shadow-xl backdrop-blur-md">
+          <nav className="flex flex-col space-y-2 px-4">
             {sections.map(section => (
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
-                className={`px-4 py-3 text-lg font-bold tracking-wider uppercase rounded-lg text-left transition-all duration-200 ${
+                className={`px-4 py-3 text-base font-semibold tracking-wide rounded-md text-left transition-all duration-200 ${
                   activeSection === section.id
-                    ? 'bg-who-blue text-white'
-                    : 'text-who-blue hover:bg-who-blue/10'
+                    ? 'bg-who-blue/10 text-who-blue'
+                    : 'text-gray-700 hover:bg-gray-100'
                 }`}
               >
                 {section.name}
               </button>
             ))}
-            <button
-              onClick={() => {
-                const el = document.getElementById('registration');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="bg-gradient-to-r from-who-blue to-who-orange text-white px-6 py-3 rounded-full font-semibold shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200"
-            >
-              Register Now
-            </button>
+            <div className="pt-2">
+              <RegisterButton className="w-full px-6 py-3 rounded-md" />
+            </div>
           </nav>
         </div>
       )}

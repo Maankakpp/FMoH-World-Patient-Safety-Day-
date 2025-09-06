@@ -59,6 +59,7 @@ const KeySpeakers: React.FC = () => {
       expertise: ["Neonatal Care", "East Africa Healthcare", "Medical Education"],
       social: {
         linkedin: "https://linkedin.com/in/ahmed-hassan",
+        twitter: "https://twitter.com/profchen",
         website: "https://somaliamedical.org"
       },
       featured: true
@@ -250,4 +251,4 @@ const KeySpeakers: React.FC = () => {
   );
 };
 
-export default KeySpeakers; 
+export default KeySpeakers;
