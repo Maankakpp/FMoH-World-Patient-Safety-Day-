@@ -50,32 +50,29 @@ const Header: React.FC = () => {
   return (
     <header 
       className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/90 shadow-md backdrop-blur-lg' : 'bg-transparent'
+        isScrolled ? 'bg-stone-100/90 shadow-md backdrop-blur-lg' : 'bg-transparent'
       }`}
     >
       <div className="container flex items-center justify-between py-4">
         {/* Logo */}
         <a href="/" className="focus:outline-none" aria-label="Go to homepage">
-          <picture>
-            <source srcSet="/wpsd-logo.webp" type="image/webp" />
-            <img
-              src="/wpsd-logo.png"
-              alt="World Patient Safety Day Logo"
-              className="h-14 w-auto transition-all duration-300 hover:opacity-80"
-              width="175"
-              height="54"
-              loading="lazy"
-            />
-          </picture>
+          <img
+            src="/Logo.png"
+            alt="Health Day Logo"
+            className="h-16 w-auto transition-all duration-300"
+            width="175"
+            height="54"
+            loading="lazy"
+          />
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-4" aria-label="Main Navigation">
+        <nav className="hidden lg:flex items-center space-x-2" aria-label="Main Navigation">
           {sections.map(section => (
             <button
               key={section.id}
               onClick={() => scrollToSection(section.id)}
-              className={`relative px-3 py-2 font-medium text-gray-700 transition-colors duration-300 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-who-blue after:transition-transform after:duration-300 after:scale-x-0 hover:after:scale-x-100 focus:outline-none ${
+              className={`relative px-4 py-2 font-medium text-stone-800 tracking-wider transition-colors duration-300 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-stone-800 after:transition-transform after:duration-300 after:scale-x-0 hover:after:scale-x-100 focus:outline-none ${
                 activeSection === section.id ? 'after:scale-x-100' : ''
               }`}
             >
@@ -88,7 +85,7 @@ const Header: React.FC = () => {
         {/* Mobile Menu Button */}
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="lg:hidden p-2 text-gray-700"
+          className="lg:hidden p-2 text-stone-800"
         >
           {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
         </button>
@@ -96,7 +93,7 @@ const Header: React.FC = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden mt-2 py-4 bg-white/95 rounded-lg shadow-xl backdrop-blur-md">
+        <div className="lg:hidden mt-2 py-4 bg-stone-100/95 rounded-lg shadow-xl backdrop-blur-md">
           <nav className="flex flex-col space-y-2 px-4">
             {sections.map(section => (
               <button
@@ -104,8 +101,8 @@ const Header: React.FC = () => {
                 onClick={() => scrollToSection(section.id)}
                 className={`px-4 py-3 text-base font-semibold tracking-wide rounded-md text-left transition-all duration-200 ${
                   activeSection === section.id
-                    ? 'bg-who-blue/10 text-who-blue'
-                    : 'text-gray-700 hover:bg-gray-100'
+                    ? 'bg-stone-200 text-stone-800'
+                    : 'text-stone-700 hover:bg-stone-200'
                 }`}
               >
                 {section.name}
